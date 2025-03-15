@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Validator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Advanced Credit Card Validator</h1>
+        <p>Enter up to 100 card numbers (one per line). No data is stored.</p>
+    </header>
+
+    <form method="post">
+        <textarea name="cards" placeholder="Enter card numbers here, one per line..."></textarea><br>
+        <button type="submit">Check Cards</button>
+    </form>
+
+    <div class="results">
+        {% if results %}
+            {% for result in results %}
+                <div class="result {{ 'valid' if result.valid else 'invalid' }}">
+                    <strong>{{ result.input }}</strong><br>
+                    Card Number: {{ result.number }}<br>
+                    Validation: {{ '✅ Valid' if result.valid else '❌ Invalid' }}<br>
+                    Bank: {{ result.bank }}, Country: {{ result.country }}<br>
+                    Scheme: {{ result.scheme }}, Type: {{ result.type }}<br>
+                    Fraud Risk Score: {{ result.risk }}/100
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <footer>
+        &copy; {{ "2025" }} Advanced Credit Card Validator. All rights reserved.
+    </footer>
+</body>
+</html>
